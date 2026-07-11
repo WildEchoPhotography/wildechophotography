@@ -2,519 +2,105 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <meta
-    name="description"
-    content="Wild Echo Photography — wildlife, nature, and fine-art photography."
-  >
-
+  <meta name="description" content="Wild Echo Photography — quiet wildlife encounters, nature, and fine-art prints.">
   <title>Wild Echo Photography</title>
-
   <style>
-    :root {
-      --black: #070807;
-      --soft-black: #0d0f0d;
-      --cream: #f0ece3;
-      --muted: #b8b4ab;
-      --line: rgba(240, 236, 227, 0.25);
-      --overlay: rgba(0, 0, 0, 0.42);
+    :root{
+      --black:#050605;
+      --soft:#0d0f0d;
+      --cream:#f2eee6;
+      --muted:#aaa69e;
+      --line:rgba(242,238,230,.22);
     }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--black);color:var(--cream);font-family:Georgia,"Times New Roman",serif;line-height:1.6}
+    img{display:block;width:100%}
+    a{color:inherit;text-decoration:none}
+    .site-header{
+      position:absolute;top:0;left:0;width:100%;z-index:20;
+      display:flex;justify-content:space-between;align-items:center;
+      padding:24px 5%;
     }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background: var(--black);
-      color: var(--cream);
-      font-family: Georgia, "Times New Roman", serif;
-      line-height: 1.6;
-    }
-
-    img {
-      display: block;
-      width: 100%;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button,
-    a {
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    /* Header */
-
-    .site-header {
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 20;
-      width: 100%;
-      padding: 28px 5%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .header-brand {
-      font-size: 1.6rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-
-    .navigation {
-      display: flex;
-      gap: 38px;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-    }
-
-    .navigation a {
-      position: relative;
-      padding-bottom: 8px;
-    }
-
-    .navigation a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 0;
-      height: 1px;
-      background: var(--cream);
-      transition: width 0.3s ease;
-    }
-
-    .navigation a:hover::after,
-    .navigation a:focus-visible::after {
-      width: 100%;
-    }
-
-    /* Hero */
-
-    .hero {
-      min-height: 100vh;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-
+    .mini-logo{width:190px;max-width:32vw}
+    .nav{display:flex;gap:32px;font:700 .72rem/1 Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase}
+    .nav a{padding-bottom:7px;border-bottom:1px solid transparent}
+    .nav a:hover{border-color:var(--cream)}
+    .hero{
+      min-height:100vh;position:relative;display:grid;place-items:center;overflow:hidden;
       background:
-        linear-gradient(
-          to bottom,
-          rgba(0, 0, 0, 0.18),
-          rgba(0, 0, 0, 0.12) 40%,
-          rgba(0, 0, 0, 0.65)
-        ),
-        url("owl.jpg") center center / cover no-repeat;
+        linear-gradient(to bottom,rgba(0,0,0,.18),rgba(0,0,0,.16) 45%,rgba(0,0,0,.78)),
+        linear-gradient(to right,rgba(0,0,0,.45),transparent 48%,rgba(0,0,0,.2)),
+        url("images/hero-owl.jpg") center 42%/cover no-repeat;
     }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(
-          to right,
-          rgba(0, 0, 0, 0.55),
-          rgba(0, 0, 0, 0.04) 48%,
-          rgba(0, 0, 0, 0.25)
-        );
+    .hero-content{position:relative;z-index:2;text-align:center;width:min(1100px,90%);padding-top:85px}
+    .hero-logo{width:min(930px,96%);margin:0 auto;filter:drop-shadow(0 3px 18px rgba(0,0,0,.7))}
+    .tagline{margin-top:22px;font:700 clamp(.72rem,1.4vw,1rem)/1.5 Arial,sans-serif;letter-spacing:.44em;text-transform:uppercase}
+    .line{width:44px;height:1px;background:var(--cream);opacity:.7;margin:24px auto}
+    .button{
+      display:inline-block;border:1px solid rgba(242,238,230,.65);padding:13px 25px;
+      font:700 .72rem/1 Arial,sans-serif;letter-spacing:.17em;text-transform:uppercase;
+      transition:.25s ease;
     }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      width: min(1100px, 88%);
-      margin-top: 80px;
-      text-align: center;
+    .button:hover{background:var(--cream);color:var(--black)}
+    .scroll{width:16px;height:16px;border-right:1px solid var(--cream);border-bottom:1px solid var(--cream);transform:rotate(45deg);margin:27px auto 0}
+    .section{padding:92px 6%}
+    .story{display:grid;grid-template-columns:.85fr 1.35fr;gap:70px;align-items:center}
+    .eyebrow{font:700 .68rem/1 Arial,sans-serif;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
+    .story h1{font-weight:400;font-size:clamp(2.8rem,5vw,5rem);line-height:1.02}
+    .story p{font-family:Arial,sans-serif;color:var(--muted);max-width:500px;margin-top:20px;line-height:1.85}
+    .story .button{margin-top:27px}
+    .story-image{min-height:570px}
+    .story-image img{height:570px;object-fit:cover}
+    .featured{padding-top:15px}
+    .section-title{font:700 .68rem/1 Arial,sans-serif;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-bottom:24px}
+    .feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .card img{height:340px;object-fit:cover;transition:transform .5s ease,opacity .5s ease}
+    .card{overflow:hidden}
+    .card:hover img{transform:scale(1.025);opacity:.9}
+    .card h3{font-size:1rem;font-weight:400;margin-top:12px}
+    .card p{font-size:.8rem;font-style:italic;color:var(--muted)}
+    .quote{margin-top:75px;padding:24px 5%;text-align:center;background:linear-gradient(90deg,#0c0d0c,#252825,#0c0d0c);font-style:italic;font-size:clamp(1rem,2vw,1.35rem)}
+    .collections{background:var(--soft)}
+    .masonry{columns:3 320px;column-gap:18px}
+    .masonry figure{break-inside:avoid;margin-bottom:18px;background:#111}
+    .masonry img{height:auto}
+    .masonry figcaption{padding:10px 3px 2px;color:var(--muted);font-size:.85rem}
+    .contact{text-align:center;background:var(--black)}
+    .contact h2{font-size:clamp(2.8rem,5vw,5rem);font-weight:400;line-height:1.05}
+    .contact p{font-family:Arial,sans-serif;color:var(--muted);max-width:610px;margin:22px auto 0}
+    .contact .button{margin-top:28px}
+    footer{display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:center;padding:27px 5%;border-top:1px solid var(--line);font:400 .72rem Arial,sans-serif;color:var(--muted)}
+    footer .right{text-align:right}
+    footer .social{display:flex;gap:20px}
+    @media(max-width:900px){
+      .nav{gap:15px;font-size:.61rem}
+      .story{grid-template-columns:1fr;gap:40px}
+      .feature-grid{grid-template-columns:repeat(2,1fr);gap:28px 14px}
+      .card img{height:390px}
     }
-
-    .hero-logo {
-      width: min(900px, 92%);
-      margin: 0 auto;
-      object-fit: contain;
-    }
-
-    .hero-tagline {
-      margin-top: 24px;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: clamp(0.75rem, 1.4vw, 1.05rem);
-      letter-spacing: 0.45em;
-      text-transform: uppercase;
-    }
-
-    .small-line {
-      width: 46px;
-      height: 1px;
-      margin: 25px auto 0;
-      background: var(--cream);
-      opacity: 0.7;
-    }
-
-    .outline-button {
-      display: inline-block;
-      margin-top: 28px;
-      padding: 14px 28px;
-      border: 1px solid rgba(240, 236, 227, 0.65);
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      transition:
-        background 0.3s ease,
-        color 0.3s ease,
-        border-color 0.3s ease;
-    }
-
-    .outline-button:hover,
-    .outline-button:focus-visible {
-      background: var(--cream);
-      color: var(--black);
-      border-color: var(--cream);
-    }
-
-    .scroll-arrow {
-      display: block;
-      width: 18px;
-      height: 18px;
-      margin: 28px auto 0;
-      border-right: 1px solid var(--cream);
-      border-bottom: 1px solid var(--cream);
-      transform: rotate(45deg);
-      animation: floatArrow 1.8s ease-in-out infinite;
-    }
-
-    @keyframes floatArrow {
-      0%,
-      100% {
-        transform: translateY(0) rotate(45deg);
-      }
-
-      50% {
-        transform: translateY(8px) rotate(45deg);
-      }
-    }
-
-    /* Main content */
-
-    .section {
-      padding: 95px 6%;
-    }
-
-    .intro {
-      display: grid;
-      grid-template-columns: 0.85fr 1.35fr;
-      gap: 70px;
-      align-items: center;
-      background: var(--black);
-    }
-
-    .eyebrow {
-      margin-bottom: 18px;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 0.7rem;
-      letter-spacing: 0.32em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .intro-copy h1 {
-      max-width: 480px;
-      font-size: clamp(2.8rem, 5vw, 5rem);
-      font-weight: normal;
-      line-height: 1.03;
-    }
-
-    .intro-copy .heading-line {
-      width: 42px;
-      height: 1px;
-      margin: 26px 0;
-      background: var(--cream);
-      opacity: 0.7;
-    }
-
-    .intro-copy p {
-      max-width: 490px;
-      margin-bottom: 18px;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 0.97rem;
-      line-height: 1.85;
-      color: var(--muted);
-    }
-
-    .intro-image {
-      min-height: 560px;
-      overflow: hidden;
-      background: #171917;
-    }
-
-    .intro-image img {
-      width: 100%;
-      height: 100%;
-      min-height: 560px;
-      object-fit: cover;
-      transition: transform 0.8s ease;
-    }
-
-    .intro-image:hover img {
-      transform: scale(1.025);
-    }
-
-    /* Featured work */
-
-    .featured {
-      padding-top: 20px;
-      background: var(--black);
-    }
-
-    .section-title {
-      margin-bottom: 24px;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 0.7rem;
-      font-weight: normal;
-      letter-spacing: 0.32em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-    }
-
-    .photo-card {
-      min-width: 0;
-    }
-
-    .photo-frame {
-      height: 345px;
-      overflow: hidden;
-      background: #181a18;
-    }
-
-    .photo-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition:
-        transform 0.7s ease,
-        opacity 0.4s ease;
-    }
-
-    .photo-card:hover .photo-frame img {
-      transform: scale(1.035);
-      opacity: 0.9;
-    }
-
-    .photo-card h3 {
-      margin-top: 13px;
-      font-size: 1rem;
-      font-weight: normal;
-    }
-
-    .photo-card p {
-      margin-top: 2px;
-      font-style: italic;
-      font-size: 0.82rem;
-      color: var(--muted);
-    }
-
-    /* Quote */
-
-    .quote-section {
-      margin-top: 80px;
-      padding: 25px 5%;
-      text-align: center;
-      background:
-        linear-gradient(
-          90deg,
-          #101210,
-          #242724,
-          #101210
-        );
-    }
-
-    .quote-section p {
-      font-size: clamp(1rem, 2vw, 1.35rem);
-      font-style: italic;
-      color: #d4d0c8;
-    }
-
-    /* Contact */
-
-    .contact {
-      padding: 100px 6%;
-      text-align: center;
-      background: var(--soft-black);
-    }
-
-    .contact h2 {
-      font-size: clamp(2.5rem, 5vw, 4.8rem);
-      font-weight: normal;
-      line-height: 1.05;
-    }
-
-    .contact p {
-      max-width: 600px;
-      margin: 24px auto 0;
-      font-family: Arial, Helvetica, sans-serif;
-      color: var(--muted);
-    }
-
-    /* Footer */
-
-    .site-footer {
-      padding: 28px 5%;
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      gap: 25px;
-      border-top: 1px solid var(--line);
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 0.72rem;
-      color: var(--muted);
-    }
-
-    .social-links {
-      display: flex;
-      justify-content: center;
-      gap: 24px;
-    }
-
-    .social-links a {
-      color: var(--cream);
-      transition: opacity 0.3s ease;
-    }
-
-    .social-links a:hover {
-      opacity: 0.6;
-    }
-
-    .footer-location {
-      text-align: right;
-    }
-
-    /* Mobile menu styling */
-
-    @media (max-width: 900px) {
-      .site-header {
-        padding: 22px 5%;
-      }
-
-      .navigation {
-        gap: 17px;
-        font-size: 0.62rem;
-        letter-spacing: 0.12em;
-      }
-
-      .header-brand {
-        font-size: 1.15rem;
-      }
-
-      .intro {
-        grid-template-columns: 1fr;
-        gap: 45px;
-      }
-
-      .intro-image,
-      .intro-image img {
-        min-height: 470px;
-      }
-
-      .photo-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 28px 14px;
-      }
-
-      .photo-frame {
-        height: 400px;
-      }
-    }
-
-    @media (max-width: 650px) {
-      .site-header {
-        align-items: flex-start;
-      }
-
-      .header-brand {
-        max-width: 120px;
-        line-height: 1.1;
-      }
-
-      .navigation {
-        display: grid;
-        grid-template-columns: repeat(2, auto);
-        gap: 10px 20px;
-        text-align: right;
-      }
-
-      .hero {
-        min-height: 88vh;
-      }
-
-      .hero-content {
-        margin-top: 100px;
-      }
-
-      .hero-logo {
-        width: 100%;
-      }
-
-      .hero-tagline {
-        line-height: 2;
-        letter-spacing: 0.25em;
-      }
-
-      .section {
-        padding: 75px 6%;
-      }
-
-      .photo-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .photo-frame {
-        height: 430px;
-      }
-
-      .site-footer {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-
-      .footer-location {
-        text-align: center;
-      }
+    @media(max-width:620px){
+      .site-header{align-items:flex-start}
+      .mini-logo{width:135px}
+      .nav{display:grid;grid-template-columns:repeat(2,auto);gap:10px 16px;text-align:right}
+      .hero{min-height:88vh;background-position:56% center}
+      .hero-content{padding-top:110px}
+      .tagline{letter-spacing:.25em}
+      .section{padding:72px 6%}
+      .story-image,.story-image img{min-height:430px;height:430px}
+      .feature-grid{grid-template-columns:1fr}
+      .card img{height:430px}
+      footer{grid-template-columns:1fr;text-align:center}
+      footer .right{text-align:center}
+      footer .social{justify-content:center}
     }
   </style>
 </head>
-
 <body>
-
   <header class="site-header">
-    <a class="header-brand" href="#home">
-      Wild Echo
-    </a>
-
-    <nav class="navigation" aria-label="Main navigation">
+    <a href="#home"><img class="mini-logo" src="images/wild-echo-logo.png" alt="Wild Echo Photography"></a>
+    <nav class="nav" aria-label="Main navigation">
       <a href="#home">Home</a>
       <a href="#portfolio">Portfolio</a>
       <a href="#prints">Prints</a>
@@ -524,176 +110,87 @@
   </header>
 
   <main>
-
     <section class="hero" id="home">
       <div class="hero-content">
-
-        <img
-          class="hero-logo"
-          src="logo.png"
-          alt="Wild Echo Photography"
-        >
-
-        <p class="hero-tagline">
-          Wildlife · Nature · Story
-        </p>
-
-        <div class="small-line"></div>
-
-        <a class="outline-button" href="#portfolio">
-          Explore the wild
-        </a>
-
-        <span class="scroll-arrow" aria-hidden="true"></span>
-
+        <img class="hero-logo" src="images/wild-echo-logo.png" alt="Wild Echo Photography">
+        <p class="tagline">Wildlife · Nature · Story</p>
+        <div class="line"></div>
+        <a class="button" href="#portfolio">Explore the wild</a>
+        <div class="scroll" aria-hidden="true"></div>
       </div>
     </section>
 
-    <section class="section intro" id="about">
-
-      <div class="intro-copy">
+    <section class="section story" id="about">
+      <div>
         <p class="eyebrow">Welcome</p>
-
         <h1>Where the wild still speaks.</h1>
-
-        <div class="heading-line"></div>
-
-        <p>
-          Capturing the raw beauty and quiet moments of wildlife and
-          wilderness. Each image tells a story of connection, respect,
-          and the wild places we are lucky to share.
-        </p>
-
-        <p>
-          Wild Echo Photography is rooted in patience, ethical distance,
-          and a belief that wildlife is most powerful when allowed to
-          remain truly wild.
-        </p>
-
-        <a class="outline-button" href="#contact">
-          Learn more about me
-        </a>
+        <div class="line" style="margin-left:0"></div>
+        <p>Wild Echo Photography is built around quiet encounters: the moment an animal notices you, the forest holds its breath, and the natural world briefly allows itself to be witnessed.</p>
+        <p>Every image is made with patience, ethical distance, and respect for the animal and its space.</p>
+        <a class="button" href="#contact">Learn more about me</a>
       </div>
-
-      <div class="intro-image">
-        <img
-          src="moose.jpg"
-          alt="Moose standing in its natural habitat"
-        >
+      <div class="story-image">
+        <img src="images/gull-lake.jpg" alt="Gull flying across a misty mountain lake">
       </div>
-
     </section>
 
     <section class="section featured" id="portfolio">
-
       <h2 class="section-title">Featured work</h2>
-
-      <div class="photo-grid">
-
-        <article class="photo-card">
-          <div class="photo-frame">
-            <img
-              src="buck.jpg"
-              alt="Buck looking toward the camera"
-            >
-          </div>
-
-          <h3>Connection</h3>
-          <p>Colorado</p>
+      <div class="feature-grid">
+        <article class="card">
+          <img src="images/buck-portrait.jpg" alt="Velvet buck looking toward the camera">
+          <h3>Connection</h3><p>Colorado</p>
         </article>
-
-        <article class="photo-card">
-          <div class="photo-frame">
-            <img
-              src="hummingbird.jpg"
-              alt="Hummingbird photographed in flight"
-            >
-          </div>
-
-          <h3>Tiny Wonders</h3>
-          <p>Colorado</p>
+        <article class="card">
+          <img src="images/sleeping-fawn.jpg" alt="Newborn fawn sleeping beneath pine branches">
+          <h3>Stillness</h3><p>Colorado</p>
         </article>
-
-        <article class="photo-card">
-          <div class="photo-frame">
-            <img
-              src="moose-two.jpg"
-              alt="Moose photographed near the water"
-            >
-          </div>
-
-          <h3>Morning Reflections</h3>
-          <p>Colorado</p>
+        <article class="card">
+          <img src="images/grouse-flight.jpg" alt="Grouse flying through the forest">
+          <h3>Into the Trees</h3><p>Colorado</p>
         </article>
-
-        <article class="photo-card">
-          <div class="photo-frame">
-            <img
-              src="landscape.jpg"
-              alt="Mountain landscape beneath the clouds"
-            >
-          </div>
-
-          <h3>Wild Places</h3>
-          <p>Colorado</p>
+        <article class="card">
+          <img src="images/mountain.jpg" alt="Mountain rising beyond a reservoir">
+          <h3>Wild Places</h3><p>Colorado</p>
         </article>
-
       </div>
-
+      <div class="quote">The wild does not perform. It simply allows us to witness.</div>
     </section>
 
-    <section class="quote-section">
-      <p>The wild does not perform. It simply allows us to witness.</p>
+    <section class="section collections">
+      <p class="eyebrow">Selected encounters</p>
+      <div class="masonry">
+        <figure><img src="images/doe-fawn.jpg" alt="Doe tending to her newborn fawn"><figcaption>First Light</figcaption></figure>
+        <figure><img src="images/ground-squirrel.jpg" alt="Ground squirrel standing on a rock"><figcaption>Watchful</figcaption></figure>
+        <figure><img src="images/merganser.jpg" alt="Merganser standing beside dark water"><figcaption>At the Water's Edge</figcaption></figure>
+        <figure><img src="images/tanager.jpg" alt="Western tanager perched on a branch"><figcaption>Flash of Summer</figcaption></figure>
+        <figure><img src="images/grouse-portrait.jpg" alt="Grouse perched on a pine branch"><figcaption>Forest Pattern</figcaption></figure>
+        <figure><img src="images/squirrel-nesting.jpg" alt="Squirrel carrying nesting material"><figcaption>Building Home</figcaption></figure>
+        <figure><img src="images/stellers-jay.jpg" alt="Steller's jay perched on a broken tree"><figcaption>Blue in the Timber</figcaption></figure>
+        <figure><img src="images/chipmunk-close.jpg" alt="Chipmunk perched on a lichen-covered rock"><figcaption>Small Wonder</figcaption></figure>
+        <figure><img src="images/buck-meadow.jpg" alt="Velvet buck standing in an aspen meadow"><figcaption>Among the Aspens</figcaption></figure>
+      </div>
     </section>
 
-    <section class="contact" id="prints">
+    <section class="section contact" id="prints">
       <p class="eyebrow">Fine-art prints</p>
-
       <h2>Bring the wild home.</h2>
-
-      <p>
-        Selected Wild Echo photographs will be available as fine-art
-        prints. For current availability, sizing, or custom requests,
-        please get in touch.
-      </p>
-
-      <a class="outline-button" href="#contact">
-        Ask about prints
-      </a>
+      <p>Selected photographs are available as fine-art prints. Contact Wild Echo for current images, sizes, and custom requests.</p>
+      <a class="button" href="#contact">Ask about prints</a>
     </section>
 
-    <section class="contact" id="contact">
+    <section class="section contact" id="contact" style="background:var(--soft)">
       <p class="eyebrow">Contact</p>
-
       <h2>Let’s connect.</h2>
-
-      <p>
-        For print inquiries, licensing, collaborations, or questions
-        about a photograph, send an email.
-      </p>
-
-      <a
-        class="outline-button"
-        href="mailto:YOUR-EMAIL-HERE"
-      >
-        Send an email
-      </a>
+      <p>For print inquiries, licensing, collaborations, or questions about a photograph, send an email.</p>
+      <a class="button" href="mailto:YOUR-EMAIL-HERE">Send an email</a>
     </section>
-
   </main>
 
-  <footer class="site-footer">
-
+  <footer>
     <p>© 2026 Wild Echo Photography</p>
-
-    <div class="social-links">
-      <a href="#" aria-label="Instagram">Instagram</a>
-      <a href="#" aria-label="Facebook">Facebook</a>
-    </div>
-
-    <p class="footer-location">Colorado, United States</p>
-
+    <div class="social"><a href="#">Instagram</a><a href="#">Facebook</a></div>
+    <p class="right">Colorado, United States</p>
   </footer>
-
 </body>
 </html>
