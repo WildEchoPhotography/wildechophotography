@@ -7,19 +7,19 @@
 
   <meta
     name="description"
-    content="Wild Echo Photography — intimate wildlife photography celebrating the untamed beauty of the natural world."
+    content="Wild Echo Photography — wildlife, nature, and fine-art photography."
   >
 
   <title>Wild Echo Photography</title>
 
   <style>
     :root {
-      --background: #111411;
-      --background-soft: #1a1f1a;
-      --cream: #eee8dc;
-      --muted: #bcb7ac;
-      --green: #79866f;
-      --border: rgba(238, 232, 220, 0.18);
+      --black: #070807;
+      --soft-black: #0d0f0d;
+      --cream: #f0ece3;
+      --muted: #b8b4ab;
+      --line: rgba(240, 236, 227, 0.25);
+      --overlay: rgba(0, 0, 0, 0.42);
     }
 
     * {
@@ -33,7 +33,7 @@
     }
 
     body {
-      background: var(--background);
+      background: var(--black);
       color: var(--cream);
       font-family: Georgia, "Times New Roman", serif;
       line-height: 1.6;
@@ -49,53 +49,47 @@
       text-decoration: none;
     }
 
-    /* Navigation */
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Header */
 
     .site-header {
       position: absolute;
       top: 0;
       left: 0;
+      z-index: 20;
       width: 100%;
-      z-index: 10;
-      padding: 24px 6%;
+      padding: 28px 5%;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     }
 
-    .logo {
-      font-size: 1.4rem;
-      font-weight: bold;
-      letter-spacing: 0.16em;
+    .header-brand {
+      font-size: 1.6rem;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
+      white-space: nowrap;
     }
 
-    .logo span {
-      display: block;
-      margin-top: 2px;
-      font-size: 0.62rem;
-      font-family: Arial, Helvetica, sans-serif;
-      font-weight: normal;
-      letter-spacing: 0.4em;
-      color: var(--muted);
-    }
-
-    .main-nav {
+    .navigation {
       display: flex;
-      gap: 28px;
+      gap: 38px;
       font-family: Arial, Helvetica, sans-serif;
-      font-size: 0.8rem;
-      letter-spacing: 0.15em;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
     }
 
-    .main-nav a {
+    .navigation a {
       position: relative;
-      padding-bottom: 5px;
+      padding-bottom: 8px;
     }
 
-    .main-nav a::after {
+    .navigation a::after {
       content: "";
       position: absolute;
       left: 0;
@@ -106,7 +100,8 @@
       transition: width 0.3s ease;
     }
 
-    .main-nav a:hover::after {
+    .navigation a:hover::after,
+    .navigation a:focus-visible::after {
       width: 100%;
     }
 
@@ -114,265 +109,399 @@
 
     .hero {
       min-height: 100vh;
-      padding: 140px 8% 80px;
-      display: flex;
-      align-items: flex-end;
       position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+
       background:
         linear-gradient(
           to bottom,
-          rgba(10, 12, 10, 0.25),
-          rgba(10, 12, 10, 0.55) 58%,
-          rgba(10, 12, 10, 0.95)
+          rgba(0, 0, 0, 0.18),
+          rgba(0, 0, 0, 0.12) 40%,
+          rgba(0, 0, 0, 0.65)
         ),
         url("owl.jpg") center center / cover no-repeat;
     }
 
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(
+          to right,
+          rgba(0, 0, 0, 0.55),
+          rgba(0, 0, 0, 0.04) 48%,
+          rgba(0, 0, 0, 0.25)
+        );
+    }
+
     .hero-content {
-      max-width: 750px;
+      position: relative;
+      z-index: 2;
+      width: min(1100px, 88%);
+      margin-top: 80px;
+      text-align: center;
+    }
+
+    .hero-logo {
+      width: min(900px, 92%);
+      margin: 0 auto;
+      object-fit: contain;
+    }
+
+    .hero-tagline {
+      margin-top: 24px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: clamp(0.75rem, 1.4vw, 1.05rem);
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+    }
+
+    .small-line {
+      width: 46px;
+      height: 1px;
+      margin: 25px auto 0;
+      background: var(--cream);
+      opacity: 0.7;
+    }
+
+    .outline-button {
+      display: inline-block;
+      margin-top: 28px;
+      padding: 14px 28px;
+      border: 1px solid rgba(240, 236, 227, 0.65);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease;
+    }
+
+    .outline-button:hover,
+    .outline-button:focus-visible {
+      background: var(--cream);
+      color: var(--black);
+      border-color: var(--cream);
+    }
+
+    .scroll-arrow {
+      display: block;
+      width: 18px;
+      height: 18px;
+      margin: 28px auto 0;
+      border-right: 1px solid var(--cream);
+      border-bottom: 1px solid var(--cream);
+      transform: rotate(45deg);
+      animation: floatArrow 1.8s ease-in-out infinite;
+    }
+
+    @keyframes floatArrow {
+      0%,
+      100% {
+        transform: translateY(0) rotate(45deg);
+      }
+
+      50% {
+        transform: translateY(8px) rotate(45deg);
+      }
+    }
+
+    /* Main content */
+
+    .section {
+      padding: 95px 6%;
+    }
+
+    .intro {
+      display: grid;
+      grid-template-columns: 0.85fr 1.35fr;
+      gap: 70px;
+      align-items: center;
+      background: var(--black);
     }
 
     .eyebrow {
       margin-bottom: 18px;
       font-family: Arial, Helvetica, sans-serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.3em;
+      font-size: 0.7rem;
+      letter-spacing: 0.32em;
       text-transform: uppercase;
       color: var(--muted);
     }
 
-    .hero h1 {
-      max-width: 850px;
-      font-size: clamp(3.2rem, 8vw, 7.5rem);
+    .intro-copy h1 {
+      max-width: 480px;
+      font-size: clamp(2.8rem, 5vw, 5rem);
       font-weight: normal;
-      line-height: 0.95;
-      letter-spacing: -0.04em;
+      line-height: 1.03;
     }
 
-    .hero-text {
-      max-width: 590px;
-      margin-top: 28px;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 1rem;
-      color: var(--muted);
-    }
-
-    .button {
-      display: inline-block;
-      margin-top: 34px;
-      padding: 14px 24px;
-      border: 1px solid var(--cream);
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 0.76rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      transition:
-        background 0.3s ease,
-        color 0.3s ease;
-    }
-
-    .button:hover {
+    .intro-copy .heading-line {
+      width: 42px;
+      height: 1px;
+      margin: 26px 0;
       background: var(--cream);
-      color: var(--background);
+      opacity: 0.7;
     }
 
-    /* General sections */
-
-    .section {
-      padding: 110px 7%;
-    }
-
-    .section-heading {
-      max-width: 760px;
-      margin-bottom: 55px;
-    }
-
-    .section-heading h2 {
-      margin-top: 12px;
-      font-size: clamp(2.4rem, 5vw, 4.8rem);
-      font-weight: normal;
-      line-height: 1.05;
-    }
-
-    .section-heading p {
-      max-width: 620px;
-      margin-top: 22px;
+    .intro-copy p {
+      max-width: 490px;
+      margin-bottom: 18px;
       font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.97rem;
+      line-height: 1.85;
       color: var(--muted);
     }
 
-    /* Portfolio */
-
-    .portfolio {
-      background: var(--background-soft);
-    }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 20px;
-    }
-
-    .gallery-item {
-      min-height: 440px;
+    .intro-image {
+      min-height: 560px;
       overflow: hidden;
-      position: relative;
-      background: #252a25;
+      background: #171917;
     }
 
-    .gallery-item:nth-child(1) {
-      grid-column: span 7;
+    .intro-image img {
+      width: 100%;
+      height: 100%;
+      min-height: 560px;
+      object-fit: cover;
+      transition: transform 0.8s ease;
     }
 
-    .gallery-item:nth-child(2) {
-      grid-column: span 5;
+    .intro-image:hover img {
+      transform: scale(1.025);
     }
 
-    .gallery-item:nth-child(3) {
-      grid-column: span 5;
+    /* Featured work */
+
+    .featured {
+      padding-top: 20px;
+      background: var(--black);
     }
 
-    .gallery-item:nth-child(4) {
-      grid-column: span 7;
+    .section-title {
+      margin-bottom: 24px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.7rem;
+      font-weight: normal;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--muted);
     }
 
-    .gallery-item img {
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .photo-card {
+      min-width: 0;
+    }
+
+    .photo-frame {
+      height: 345px;
+      overflow: hidden;
+      background: #181a18;
+    }
+
+    .photo-frame img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.7s ease;
+      transition:
+        transform 0.7s ease,
+        opacity 0.4s ease;
     }
 
-    .gallery-item:hover img {
-      transform: scale(1.03);
+    .photo-card:hover .photo-frame img {
+      transform: scale(1.035);
+      opacity: 0.9;
     }
 
-    .image-label {
-      position: absolute;
-      left: 22px;
-      bottom: 18px;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      text-shadow: 0 2px 8px #000;
-    }
-
-    /* About */
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 70px;
-      align-items: center;
-    }
-
-    .about-image {
-      min-height: 600px;
-      background:
-        linear-gradient(rgba(10, 12, 10, 0.1), rgba(10, 12, 10, 0.25)),
-        url("about.jpg") center center / cover no-repeat;
-    }
-
-    .about-copy h2 {
-      margin-bottom: 28px;
-      font-size: clamp(2.5rem, 5vw, 4.7rem);
+    .photo-card h3 {
+      margin-top: 13px;
+      font-size: 1rem;
       font-weight: normal;
-      line-height: 1.05;
     }
 
-    .about-copy p {
-      margin-bottom: 20px;
-      font-family: Arial, Helvetica, sans-serif;
+    .photo-card p {
+      margin-top: 2px;
+      font-style: italic;
+      font-size: 0.82rem;
       color: var(--muted);
+    }
+
+    /* Quote */
+
+    .quote-section {
+      margin-top: 80px;
+      padding: 25px 5%;
+      text-align: center;
+      background:
+        linear-gradient(
+          90deg,
+          #101210,
+          #242724,
+          #101210
+        );
+    }
+
+    .quote-section p {
+      font-size: clamp(1rem, 2vw, 1.35rem);
+      font-style: italic;
+      color: #d4d0c8;
     }
 
     /* Contact */
 
     .contact {
+      padding: 100px 6%;
       text-align: center;
-      background: var(--background-soft);
-    }
-
-    .contact-inner {
-      max-width: 750px;
-      margin: 0 auto;
+      background: var(--soft-black);
     }
 
     .contact h2 {
-      font-size: clamp(2.7rem, 6vw, 5.5rem);
+      font-size: clamp(2.5rem, 5vw, 4.8rem);
       font-weight: normal;
-      line-height: 1;
+      line-height: 1.05;
     }
 
     .contact p {
+      max-width: 600px;
       margin: 24px auto 0;
-      max-width: 560px;
       font-family: Arial, Helvetica, sans-serif;
       color: var(--muted);
     }
 
     /* Footer */
 
-    footer {
-      padding: 35px 7%;
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      border-top: 1px solid var(--border);
+    .site-footer {
+      padding: 28px 5%;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 25px;
+      border-top: 1px solid var(--line);
       font-family: Arial, Helvetica, sans-serif;
       font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
       color: var(--muted);
     }
 
-    /* Mobile */
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+    }
 
-    @media (max-width: 800px) {
+    .social-links a {
+      color: var(--cream);
+      transition: opacity 0.3s ease;
+    }
+
+    .social-links a:hover {
+      opacity: 0.6;
+    }
+
+    .footer-location {
+      text-align: right;
+    }
+
+    /* Mobile menu styling */
+
+    @media (max-width: 900px) {
       .site-header {
-        position: absolute;
-        align-items: flex-start;
+        padding: 22px 5%;
       }
 
-      .main-nav {
-        display: none;
+      .navigation {
+        gap: 17px;
+        font-size: 0.62rem;
+        letter-spacing: 0.12em;
       }
 
-      .hero {
-        min-height: 90vh;
-        padding-left: 6%;
-        padding-right: 6%;
+      .header-brand {
+        font-size: 1.15rem;
       }
 
-      .section {
-        padding: 80px 6%;
-      }
-
-      .gallery {
-        display: block;
-      }
-
-      .gallery-item,
-      .gallery-item:nth-child(1),
-      .gallery-item:nth-child(2),
-      .gallery-item:nth-child(3),
-      .gallery-item:nth-child(4) {
-        min-height: 390px;
-        margin-bottom: 18px;
-      }
-
-      .about-grid {
+      .intro {
         grid-template-columns: 1fr;
         gap: 45px;
       }
 
-      .about-image {
-        min-height: 460px;
+      .intro-image,
+      .intro-image img {
+        min-height: 470px;
       }
 
-      footer {
-        flex-direction: column;
+      .photo-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 28px 14px;
+      }
+
+      .photo-frame {
+        height: 400px;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .site-header {
+        align-items: flex-start;
+      }
+
+      .header-brand {
+        max-width: 120px;
+        line-height: 1.1;
+      }
+
+      .navigation {
+        display: grid;
+        grid-template-columns: repeat(2, auto);
+        gap: 10px 20px;
+        text-align: right;
+      }
+
+      .hero {
+        min-height: 88vh;
+      }
+
+      .hero-content {
+        margin-top: 100px;
+      }
+
+      .hero-logo {
+        width: 100%;
+      }
+
+      .hero-tagline {
+        line-height: 2;
+        letter-spacing: 0.25em;
+      }
+
+      .section {
+        padding: 75px 6%;
+      }
+
+      .photo-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .photo-frame {
+        height: 430px;
+      }
+
+      .site-footer {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .footer-location {
+        text-align: center;
       }
     }
   </style>
@@ -381,13 +510,14 @@
 <body>
 
   <header class="site-header">
-    <a class="logo" href="#home">
+    <a class="header-brand" href="#home">
       Wild Echo
-      <span>Photography</span>
     </a>
 
-    <nav class="main-nav">
+    <nav class="navigation" aria-label="Main navigation">
+      <a href="#home">Home</a>
       <a href="#portfolio">Portfolio</a>
+      <a href="#prints">Prints</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -397,107 +527,172 @@
 
     <section class="hero" id="home">
       <div class="hero-content">
-        <p class="eyebrow">Wildlife · Nature · Fine Art</p>
+
+        <img
+          class="hero-logo"
+          src="logo.png"
+          alt="Wild Echo Photography"
+        >
+
+        <p class="hero-tagline">
+          Wildlife · Nature · Story
+        </p>
+
+        <div class="small-line"></div>
+
+        <a class="outline-button" href="#portfolio">
+          Explore the wild
+        </a>
+
+        <span class="scroll-arrow" aria-hidden="true"></span>
+
+      </div>
+    </section>
+
+    <section class="section intro" id="about">
+
+      <div class="intro-copy">
+        <p class="eyebrow">Welcome</p>
 
         <h1>Where the wild still speaks.</h1>
 
-        <p class="hero-text">
-          Intimate wildlife photography celebrating quiet encounters,
-          untamed landscapes, and the animals that call them home.
-        </p>
-
-        <a class="button" href="#portfolio">Explore the portfolio</a>
-      </div>
-    </section>
-
-    <section class="section portfolio" id="portfolio">
-      <div class="section-heading">
-        <p class="eyebrow">Selected work</p>
-
-        <h2>Stories from the wild.</h2>
+        <div class="heading-line"></div>
 
         <p>
-          A collection of fleeting moments shaped by patience, distance,
-          and respect for the animals in front of the lens.
+          Capturing the raw beauty and quiet moments of wildlife and
+          wilderness. Each image tells a story of connection, respect,
+          and the wild places we are lucky to share.
         </p>
-      </div>
-
-      <div class="gallery">
-
-        <figure class="gallery-item">
-          <img src="moose.jpg" alt="Moose photographed in the wild">
-          <figcaption class="image-label">Moose</figcaption>
-        </figure>
-
-        <figure class="gallery-item">
-          <img src="eagle.jpg" alt="Bald eagle photographed in the wild">
-          <figcaption class="image-label">Bald Eagle</figcaption>
-        </figure>
-
-        <figure class="gallery-item">
-          <img src="hummingbird.jpg" alt="Hummingbird in flight">
-          <figcaption class="image-label">Hummingbird</figcaption>
-        </figure>
-
-        <figure class="gallery-item">
-          <img src="deer.jpg" alt="Wild deer photographed in nature">
-          <figcaption class="image-label">Deer</figcaption>
-        </figure>
-
-      </div>
-    </section>
-
-    <section class="section" id="about">
-      <div class="about-grid">
-
-        <div class="about-image" role="img" aria-label="Wildlife photographer in nature"></div>
-
-        <div class="about-copy">
-          <p class="eyebrow">Behind the lens</p>
-
-          <h2>Photography rooted in patience and respect.</h2>
-
-          <p>
-            Wild Echo Photography was created from a love of wildlife and
-            the quiet moments that happen when the natural world is allowed
-            to exist without interruption.
-          </p>
-
-          <p>
-            Each image is made with patience, ethical distance, and respect
-            for the animal. The goal is not simply to document wildlife, but
-            to reveal the personality, resilience, and beauty found in every
-            encounter.
-          </p>
-
-          <a class="button" href="#contact">Get in touch</a>
-        </div>
-
-      </div>
-    </section>
-
-    <section class="section contact" id="contact">
-      <div class="contact-inner">
-        <p class="eyebrow">Contact</p>
-
-        <h2>Bring the wild home.</h2>
 
         <p>
-          For print inquiries, licensing, collaborations, or questions about
-          a photograph, send a message through social media or email.
+          Wild Echo Photography is rooted in patience, ethical distance,
+          and a belief that wildlife is most powerful when allowed to
+          remain truly wild.
         </p>
 
-        <a class="button" href="mailto:YOUR-EMAIL-HERE">
-          Send an email
+        <a class="outline-button" href="#contact">
+          Learn more about me
         </a>
       </div>
+
+      <div class="intro-image">
+        <img
+          src="moose.jpg"
+          alt="Moose standing in its natural habitat"
+        >
+      </div>
+
+    </section>
+
+    <section class="section featured" id="portfolio">
+
+      <h2 class="section-title">Featured work</h2>
+
+      <div class="photo-grid">
+
+        <article class="photo-card">
+          <div class="photo-frame">
+            <img
+              src="buck.jpg"
+              alt="Buck looking toward the camera"
+            >
+          </div>
+
+          <h3>Connection</h3>
+          <p>Colorado</p>
+        </article>
+
+        <article class="photo-card">
+          <div class="photo-frame">
+            <img
+              src="hummingbird.jpg"
+              alt="Hummingbird photographed in flight"
+            >
+          </div>
+
+          <h3>Tiny Wonders</h3>
+          <p>Colorado</p>
+        </article>
+
+        <article class="photo-card">
+          <div class="photo-frame">
+            <img
+              src="moose-two.jpg"
+              alt="Moose photographed near the water"
+            >
+          </div>
+
+          <h3>Morning Reflections</h3>
+          <p>Colorado</p>
+        </article>
+
+        <article class="photo-card">
+          <div class="photo-frame">
+            <img
+              src="landscape.jpg"
+              alt="Mountain landscape beneath the clouds"
+            >
+          </div>
+
+          <h3>Wild Places</h3>
+          <p>Colorado</p>
+        </article>
+
+      </div>
+
+    </section>
+
+    <section class="quote-section">
+      <p>The wild does not perform. It simply allows us to witness.</p>
+    </section>
+
+    <section class="contact" id="prints">
+      <p class="eyebrow">Fine-art prints</p>
+
+      <h2>Bring the wild home.</h2>
+
+      <p>
+        Selected Wild Echo photographs will be available as fine-art
+        prints. For current availability, sizing, or custom requests,
+        please get in touch.
+      </p>
+
+      <a class="outline-button" href="#contact">
+        Ask about prints
+      </a>
+    </section>
+
+    <section class="contact" id="contact">
+      <p class="eyebrow">Contact</p>
+
+      <h2>Let’s connect.</h2>
+
+      <p>
+        For print inquiries, licensing, collaborations, or questions
+        about a photograph, send an email.
+      </p>
+
+      <a
+        class="outline-button"
+        href="mailto:YOUR-EMAIL-HERE"
+      >
+        Send an email
+      </a>
     </section>
 
   </main>
 
-  <footer>
+  <footer class="site-footer">
+
     <p>© 2026 Wild Echo Photography</p>
-    <p>Wildlife photographed with care and respect.</p>
+
+    <div class="social-links">
+      <a href="#" aria-label="Instagram">Instagram</a>
+      <a href="#" aria-label="Facebook">Facebook</a>
+    </div>
+
+    <p class="footer-location">Colorado, United States</p>
+
   </footer>
 
 </body>
