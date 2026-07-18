@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A curated portfolio of wildlife, nature, and quiet encounters by Wild Echo Photography.">
+  <title>Portfolio | Wild Echo Photography</title>
+  <style>
+    :root{
+      --black:#050605;
+      --soft:#0d0f0d;
+      --cream:#f2eee6;
+      --muted:#aaa69e;
+      --line:rgba(242,238,230,.22);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--black);color:var(--cream);font-family:Georgia,"Times New Roman",serif;line-height:1.6}
+    img{display:block;width:100%}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+    .site-header{
+      position:absolute;top:0;left:0;width:100%;z-index:20;
+      display:flex;justify-content:space-between;align-items:center;
+      padding:24px 5%;
+    }
+    .mini-logo{width:190px;max-width:32vw}
+    .nav{display:flex;gap:32px;font:700 .72rem/1 Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase}
+    .nav a{padding-bottom:7px;border-bottom:1px solid transparent}
+    .nav a:hover{border-color:var(--cream)}
+    .portfolio-hero{
+      min-height:56vh;display:grid;place-items:end center;text-align:center;
+      padding:150px 6% 72px;
+      background:
+        linear-gradient(to bottom,rgba(0,0,0,.28),rgba(0,0,0,.85)),
+        url("images/hero-owl.jpg") center 42%/cover no-repeat;
+    }
+    .portfolio-hero h1{font-weight:400;font-size:clamp(3rem,7vw,6rem);line-height:1}
+    .portfolio-hero p{font-family:Arial,sans-serif;color:var(--muted);max-width:660px;margin:20px auto 0}
+    .eyebrow{font:700 .68rem/1 Arial,sans-serif;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
+    .section{padding:90px 5%}
+    .intro{max-width:760px;margin:0 auto 54px;text-align:center}
+    .intro h2{font-size:clamp(2.3rem,5vw,4.5rem);font-weight:400;line-height:1.08}
+    .intro p{font-family:Arial,sans-serif;color:var(--muted);max-width:650px;margin:20px auto 0}
+    .line{width:44px;height:1px;background:var(--cream);opacity:.7;margin:24px auto}
+    .masonry{columns:3 330px;column-gap:18px}
+    .portfolio-item{break-inside:avoid;margin-bottom:24px}
+    .image-button{display:block;width:100%;border:0;background:#111;cursor:zoom-in;overflow:hidden}
+    .image-button img{height:auto;transition:transform .45s ease,opacity .45s ease}
+    .image-button:hover img{transform:scale(1.018);opacity:.9}
+    figcaption{padding:10px 2px 0;color:var(--muted);font-size:.88rem;font-style:italic}
+    .quote{margin-top:76px;padding:25px 5%;text-align:center;background:linear-gradient(90deg,#0c0d0c,#252825,#0c0d0c);font-style:italic;font-size:clamp(1rem,2vw,1.35rem)}
+    .contact{text-align:center;background:var(--soft)}
+    .contact h2{font-size:clamp(2.8rem,5vw,5rem);font-weight:400;line-height:1.05}
+    .contact p{font-family:Arial,sans-serif;color:var(--muted);max-width:610px;margin:22px auto 0}
+    .button{
+      display:inline-block;border:1px solid rgba(242,238,230,.65);padding:13px 25px;margin-top:28px;
+      font:700 .72rem/1 Arial,sans-serif;letter-spacing:.17em;text-transform:uppercase;transition:.25s ease;
+    }
+    .button:hover{background:var(--cream);color:var(--black)}
+    footer{display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:center;padding:27px 5%;border-top:1px solid var(--line);font:400 .72rem Arial,sans-serif;color:var(--muted)}
+    footer .right{text-align:right}
+    footer .social{display:flex;gap:20px}
+
+    .lightbox{
+      position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;
+      background:rgba(0,0,0,.94);padding:54px 74px;
+    }
+    .lightbox.open{display:flex}
+    .lightbox-content{max-width:92vw;max-height:82vh;object-fit:contain;width:auto;height:auto}
+    .lightbox-title{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);color:var(--cream);font-style:italic;text-align:center}
+    .lightbox-close,.lightbox-prev,.lightbox-next{
+      position:absolute;border:0;background:rgba(5,6,5,.5);color:var(--cream);cursor:pointer;
+      width:48px;height:48px;font-size:2rem;line-height:1;
+    }
+    .lightbox-close{right:18px;top:16px}
+    .lightbox-prev{left:15px;top:50%;transform:translateY(-50%)}
+    .lightbox-next{right:15px;top:50%;transform:translateY(-50%)}
+    .lightbox-close:hover,.lightbox-prev:hover,.lightbox-next:hover{background:rgba(242,238,230,.18)}
+
+    @media(max-width:900px){
+      .nav{gap:15px;font-size:.61rem}
+      .masonry{columns:2 280px}
+    }
+    @media(max-width:620px){
+      .site-header{align-items:flex-start}
+      .mini-logo{width:135px}
+      .nav{display:grid;grid-template-columns:repeat(2,auto);gap:10px 16px;text-align:right}
+      .portfolio-hero{min-height:48vh;padding-top:130px}
+      .section{padding:70px 6%}
+      .masonry{columns:1}
+      .lightbox{padding:58px 12px}
+      .lightbox-prev,.lightbox-next{width:42px;height:42px;font-size:1.65rem}
+      footer{grid-template-columns:1fr;text-align:center}
+      footer .right{text-align:center}
+      footer .social{justify-content:center}
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a href="index.html#home"><img class="mini-logo" src="images/wild-echo-logo.png" alt="Wild Echo Photography"></a>
+    <nav class="nav" aria-label="Main navigation">
+      <a href="index.html#home">Home</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="index.html#prints">Prints</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="portfolio-hero">
+      <div>
+        <p class="eyebrow">Wildlife · Nature · Story</p>
+        <h1>Portfolio</h1>
+        <p>A curated collection of wild places, quiet discoveries, movement, tenderness, and the brief moments nature allows us to witness.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="intro">
+        <p class="eyebrow">Selected encounters</p>
+        <h2>Where the wild still speaks.</h2>
+        <div class="line"></div>
+        <p>Each photograph is made with patience, ethical distance, and respect for the animal and its space. Click any image to view it larger.</p>
+      </div>
+
+      <div class="masonry">
+        <figure class="portfolio-item">
+          <button class="image-button" type="button" data-full="images/mountain-sunset.jpg" data-title="After the Storm" aria-label="Open After the Storm">
+            <img src="images/mountain-sunset.jpg" alt="Layered mountains beneath a violet and peach sunset" loading="lazy">
+          </button>
+          <figcaption>After the Storm</figcaption>
+        </figure>
+        <figure class="portfolio-item">
+          <button class="image-button" type="button" data-full="images/steller-jay-flight.jpg" data-title="Blue Motion" aria-label="Open Blue Motion">
+            <img src="images/steller-jay-flight.jpg" alt="Steller&#x27;s jay flying through green woodland" loading="lazy">
+          </button>
+          <figcaption>Blue Motion</figcaption>
+        </figure>
+        <figure class="portfolio-item">
+          <button class="image-button" type="button" data-full="images/owl-forest.jpg" data-title="Seen" aria-label="Open Seen">
+            <img src="images/owl-forest.jpg" alt="Great horned owl watching through soft forest branches" loading="lazy">
+          </button>
+          <figcaption>Seen</figcaption>
+        </figure>
+        <figure class="portfolio-item">
+          <button class="image-button" type="button" data-full="images/gull-mist.jpg" data-title="On the Wind" aria-label="Open On the Wind">
+            <img src="images/gull-mist.jpg" alt="Gull flying against a misty mountain lake" loading="lazy">
+          </button>
+          <figcaption>On the Wind</figcaption>
+        </figure>
+        <figure class="portfolio-item">
+          <button class="image-button" type="button" data-full="images/raven-flight.jpg" data-title="Black Wings" aria-label="Open Black Wings">
+            <img src="images/raven-flight.jpg" alt="Raven flying against a clear blue sky" loading="lazy">
+          </button>
+          <figcaption>Black Wings</figcaption>
+        </figure>
+        <figure class="portfolio-item">
+          <button class="image-button" type="button" data-full="images/rabbit-grass.jpg" data-title="Quiet Ground" aria-label="Open Quiet Ground">
+            <img src="images/rabbit-grass.jpg" alt="Rabbit sitting upright among grasses and wild plants" loading="lazy">
+          </button>
+          <figcaption>Quiet Ground</figcaption>
+        </figure>
+        <figure class="portfolio-item">
+          <button class="image-button" type="button" data-full="images/buck-brush.jpg" data-title="The Meeting" aria-label="Open The Meeting">
+            <img src="images/buck-brush.jpg" alt="Velvet buck looking through dense green brush" loading="lazy">
+          </button>
+          <figcaption>The Meeting</figcaption>
+        </figure>
+        <figure class="portfolio-item">
+          <button class="image-button" type="button" data-full="images/doe-fawn.jpg" data-title="Tenderness" aria-label="Open Tenderness">
+            <img src="images/doe-fawn.jpg" alt="Doe grooming her newborn fawn beneath the trees" loading="lazy">
+          </button>
+          <figcaption>Tenderness</figcaption>
+        </figure>
+        <figure class="portfolio-item">
+          <button class="image-button" type="button" data-full="images/sleeping-fawn.jpg" data-title="Hidden Stillness" aria-label="Open Hidden Stillness">
+            <img src="images/sleeping-fawn.jpg" alt="Newborn fawn sleeping beneath pine branches" loading="lazy">
+          </button>
+          <figcaption>Hidden Stillness</figcaption>
+        </figure>
+        <figure class="portfolio-item">
+          <button class="image-button" type="button" data-full="images/grouse-flight.jpg" data-title="Into the Trees" aria-label="Open Into the Trees">
+            <img src="images/grouse-flight.jpg" alt="Grouse flying through a sunlit forest" loading="lazy">
+          </button>
+          <figcaption>Into the Trees</figcaption>
+        </figure>
+        <figure class="portfolio-item">
+          <button class="image-button" type="button" data-full="images/heron-rock.jpg" data-title="Still Water" aria-label="Open Still Water">
+            <img src="images/heron-rock.jpg" alt="Great blue heron standing on granite beside mountain water" loading="lazy">
+          </button>
+          <figcaption>Still Water</figcaption>
+        </figure>
+        <figure class="portfolio-item">
+          <button class="image-button" type="button" data-full="images/merganser.jpg" data-title="At the Water&#x27;s Edge" aria-label="Open At the Water&#x27;s Edge">
+            <img src="images/merganser.jpg" alt="Common merganser standing on a pale rock beside dark water" loading="lazy">
+          </button>
+          <figcaption>At the Water&#x27;s Edge</figcaption>
+        </figure>
+        <figure class="portfolio-item">
+          <button class="image-button" type="button" data-full="images/duck-family.jpg" data-title="Following" aria-label="Open Following">
+            <img src="images/duck-family.jpg" alt="Mallard leading a line of ducklings across calm water" loading="lazy">
+          </button>
+          <figcaption>Following</figcaption>
+        </figure>
+        <figure class="portfolio-item">
+          <button class="image-button" type="button" data-full="images/chipmunk-eating.jpg" data-title="Small Feast" aria-label="Open Small Feast">
+            <img src="images/chipmunk-eating.jpg" alt="Chipmunk holding food while perched on weathered wood" loading="lazy">
+          </button>
+          <figcaption>Small Feast</figcaption>
+        </figure>
+        <figure class="portfolio-item">
+          <button class="image-button" type="button" data-full="images/chipmunk-rock.jpg" data-title="Small Wonder" aria-label="Open Small Wonder">
+            <img src="images/chipmunk-rock.jpg" alt="Chipmunk sitting on a lichen-covered rock" loading="lazy">
+          </button>
+          <figcaption>Small Wonder</figcaption>
+        </figure>
+        <figure class="portfolio-item">
+          <button class="image-button" type="button" data-full="images/ground-squirrel.jpg" data-title="Watchful" aria-label="Open Watchful">
+            <img src="images/ground-squirrel.jpg" alt="Ground squirrel perched on a granite rock" loading="lazy">
+          </button>
+          <figcaption>Watchful</figcaption>
+        </figure>
+        <figure class="portfolio-item">
+          <button class="image-button" type="button" data-full="images/moose-hidden.jpg" data-title="Among the Willows" aria-label="Open Among the Willows">
+            <img src="images/moose-hidden.jpg" alt="Moose partly concealed by dense spring growth" loading="lazy">
+          </button>
+          <figcaption>Among the Willows</figcaption>
+        </figure>
+        <figure class="portfolio-item">
+          <button class="image-button" type="button" data-full="images/steller-jay-perched.jpg" data-title="Forest Blue" aria-label="Open Forest Blue">
+            <img src="images/steller-jay-perched.jpg" alt="Steller&#x27;s jay perched among green leaves and fallen wood" loading="lazy">
+          </button>
+          <figcaption>Forest Blue</figcaption>
+        </figure>
+        <figure class="portfolio-item">
+          <button class="image-button" type="button" data-full="images/ravens-pair.jpg" data-title="Together" aria-label="Open Together">
+            <img src="images/ravens-pair.jpg" alt="Two ravens perched closely against a blue sky" loading="lazy">
+          </button>
+          <figcaption>Together</figcaption>
+        </figure>
+        <figure class="portfolio-item">
+          <button class="image-button" type="button" data-full="images/pelicans-pond.jpg" data-title="Gathering" aria-label="Open Gathering">
+            <img src="images/pelicans-pond.jpg" alt="White pelicans resting together in a quiet pond" loading="lazy">
+          </button>
+          <figcaption>Gathering</figcaption>
+        </figure>
+        <figure class="portfolio-item">
+          <button class="image-button" type="button" data-full="images/grouse-perched.jpg" data-title="Woodland Pattern" aria-label="Open Woodland Pattern">
+            <img src="images/grouse-perched.jpg" alt="Grouse perched on a pine branch" loading="lazy">
+          </button>
+          <figcaption>Woodland Pattern</figcaption>
+        </figure>
+        <figure class="portfolio-item">
+          <button class="image-button" type="button" data-full="images/tanager.jpg" data-title="Flash of Summer" aria-label="Open Flash of Summer">
+            <img src="images/tanager.jpg" alt="Western tanager perched on a branch" loading="lazy">
+          </button>
+          <figcaption>Flash of Summer</figcaption>
+        </figure>
+        <figure class="portfolio-item">
+          <button class="image-button" type="button" data-full="images/nesting-bird.jpg" data-title="Building Season" aria-label="Open Building Season">
+            <img src="images/nesting-bird.jpg" alt="Small yellow bird carrying nesting material" loading="lazy">
+          </button>
+          <figcaption>Building Season</figcaption>
+        </figure>
+        <figure class="portfolio-item">
+          <button class="image-button" type="button" data-full="images/butterfly.jpg" data-title="Summer Wings" aria-label="Open Summer Wings">
+            <img src="images/butterfly.jpg" alt="Swallowtail butterfly resting among pale purple flowers" loading="lazy">
+          </button>
+          <figcaption>Summer Wings</figcaption>
+        </figure>
+        <figure class="portfolio-item">
+          <button class="image-button" type="button" data-full="images/thistle.jpg" data-title="A Small Echo" aria-label="Open A Small Echo">
+            <img src="images/thistle.jpg" alt="Purple thistle isolated against a soft green background" loading="lazy">
+          </button>
+          <figcaption>A Small Echo</figcaption>
+        </figure>
+        <figure class="portfolio-item">
+          <button class="image-button" type="button" data-full="images/wildflowers.jpg" data-title="Field Notes" aria-label="Open Field Notes">
+            <img src="images/wildflowers.jpg" alt="Cluster of lavender wildflowers against a soft natural background" loading="lazy">
+          </button>
+          <figcaption>Field Notes</figcaption>
+        </figure>
+        <figure class="portfolio-item">
+          <button class="image-button" type="button" data-full="images/mountain-storm.jpg" data-title="Weather Moving In" aria-label="Open Weather Moving In">
+            <img src="images/mountain-storm.jpg" alt="Mountain ridge disappearing into dramatic storm clouds" loading="lazy">
+          </button>
+          <figcaption>Weather Moving In</figcaption>
+        </figure>
+        <figure class="portfolio-item">
+          <button class="image-button" type="button" data-full="images/mountain-evening.jpg" data-title="Leaving the Wild" aria-label="Open Leaving the Wild">
+            <img src="images/mountain-evening.jpg" alt="Mountain ridge wrapped in low clouds at evening" loading="lazy">
+          </button>
+          <figcaption>Leaving the Wild</figcaption>
+        </figure>
+      </div>
+
+      <div class="quote">The wild does not perform. It simply allows us to witness.</div>
+    </section>
+
+    <section class="section contact">
+      <p class="eyebrow">Fine-art prints</p>
+      <h2>Bring the wild home.</h2>
+      <p>Selected photographs are available as fine-art prints. Contact Wild Echo for current images, sizes, and custom requests.</p>
+      <a class="button" href="index.html#contact">Ask about prints</a>
+    </section>
+  </main>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Expanded photograph">
+    <button class="lightbox-close" type="button" aria-label="Close">&times;</button>
+    <button class="lightbox-prev" type="button" aria-label="Previous photograph">&#8249;</button>
+    <img class="lightbox-content" src="" alt="">
+    <button class="lightbox-next" type="button" aria-label="Next photograph">&#8250;</button>
+    <p class="lightbox-title"></p>
+  </div>
+
+  <footer>
+    <p>© 2026 Wild Echo Photography</p>
+    <div class="social">
+      <a href="https://www.instagram.com/wildechophotography/" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a href="https://www.facebook.com/wildechophotography/" target="_blank" rel="noopener noreferrer">Facebook</a>
+      <a href="https://www.tiktok.com/@wildechophotography" target="_blank" rel="noopener noreferrer">TikTok</a>
+    </div>
+    <p class="right">Colorado, United States</p>
+  </footer>
+
+  <script>
+    const items = [...document.querySelectorAll('.image-button')];
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = lightbox.querySelector('.lightbox-content');
+    const lightboxTitle = lightbox.querySelector('.lightbox-title');
+    let currentIndex = 0;
+
+    function showImage(index) {
+      currentIndex = (index + items.length) % items.length;
+      const item = items[currentIndex];
+      const preview = item.querySelector('img');
+      lightboxImage.src = item.dataset.full;
+      lightboxImage.alt = preview.alt;
+      lightboxTitle.textContent = item.dataset.title;
+    }
+
+    function openLightbox(index) {
+      showImage(index);
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      lightbox.querySelector('.lightbox-close').focus();
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+      items[currentIndex].focus();
+    }
+
+    items.forEach((item, index) => item.addEventListener('click', () => openLightbox(index)));
+    lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+    lightbox.querySelector('.lightbox-prev').addEventListener('click', () => showImage(currentIndex - 1));
+    lightbox.querySelector('.lightbox-next').addEventListener('click', () => showImage(currentIndex + 1));
+
+    lightbox.addEventListener('click', event => {
+      if (event.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', event => {
+      if (!lightbox.classList.contains('open')) return;
+      if (event.key === 'Escape') closeLightbox();
+      if (event.key === 'ArrowLeft') showImage(currentIndex - 1);
+      if (event.key === 'ArrowRight') showImage(currentIndex + 1);
+    });
+  </script>
+</body>
+</html>
